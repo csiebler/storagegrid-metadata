@@ -1,0 +1,17 @@
+%html
+  %head
+    %link(rel="stylesheet" type="text/css" href="styles.css")
+  %body
+    .header
+      %h1 Search Results
+    .content
+      %p Search query "#{@query}" returned #{@num_results} object(s) in #{@time}ms
+      %hr
+      - @results.each do |r|
+        %p Object: #{r['_id']}
+        Metadata:
+        %br
+        - r['_source'].each do |k, v|
+          #{k} = #{v}
+          %br
+        %hr

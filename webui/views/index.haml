@@ -1,0 +1,18 @@
+%html
+  %head
+    %link(rel="stylesheet" type="text/css" href="styles.css")
+  %body
+    .header
+      %h1 Metadata Search for StorageGRID Webscale
+    .content
+      %form(action="/search" method="get" enctype='multipart/form-data')
+        %fieldset
+          %label(for='query') Query:
+          %input(type='text' required=true minlength='1' placeholder='Query' name='query')
+          %input(type='submit' value='Search' class='button')
+      %p Usage Examples
+      %li "*" will return all objects
+      %li "customer:*" will return all objects, that have a metadata field called "customer"
+      %li "customer:123" will return all objects with metadata "customer=123"
+      %li "customer:1*" will return all objects with metadata "customer=1*"
+      %li "customer=123 and location=europe" will return all objects with metadata "customer=123" and "location=europe"

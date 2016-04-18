@@ -12,7 +12,8 @@ The containerized setup is based on:
 
 ## Configuration
 
-At this point in time, the StorageGRID Audit Logs need to be mounted on the Docker host under `/mnt/auditlogs/`
+* The StorageGRID Audit Logs need to be mounted on the Docker host under `/mnt/auditlogs/`
+* Edit `config/indexer.conf` and add the StorageGRID API endpoint address and S3 account credentials
 
 ## Usage
 

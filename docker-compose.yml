@@ -1,0 +1,23 @@
+elasticsearch:
+  image: elasticsearch:latest
+  command: elasticsearch -Des.network.host=0.0.0.0
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+
+indexer:
+  build: ./indexer
+  command: python /indexer/indexer.py
+  volumes:
+    - /Users/csiebler/netapp/temp/audit-log:/mnt/auditlogs
+    - ./config/indexer.conf:/indexer/indexer.conf
+  links:
+    - elasticsearch
+
+webui:
+  build: ./webui
+  command: shotgun --host 0.0.0.0 --port 8080 /sinatra/server.rb
+  ports:
+    - "8080:8080"
+  links:
+    - elasticsearch
