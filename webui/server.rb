@@ -2,6 +2,7 @@ require 'sinatra'
 require 'haml'
 require 'elasticsearch'
 
+sgurl = "https://10.10.4.110:8082/"
 config = {
   host: "elasticsearch:9200"
 }
@@ -18,6 +19,7 @@ get "/search" do
   @num_results = response['hits']['total']
   @results = response['hits']['hits']
   @time = response['took']
+  @endpoint = sgurl
 
   haml :search
 end

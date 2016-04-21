@@ -9,6 +9,8 @@
       %hr
       - @results.each do |r|
         %p Object: #{r['_id']}
+        %a(href="#{@endpoint}#{r['_id']}")> Download
+        %br
         Metadata:
         %br
         - r['_source'].each do |k, v|
