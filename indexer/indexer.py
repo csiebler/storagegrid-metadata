@@ -54,6 +54,13 @@ for line in tailer.follow(open(audit_log)):
             print("PUT: %s/%s with metdata: %s" % (key, bucket, metadata))
             es.index(index='objects', doc_type='object', id=id, body=metadata)
 
+        if bucket in buckets and action == 'SUPD':
+            obj = s3.Object(bucket, key)
+            response = obj.get()
+            metadata = response['Metadata']
+            print("SUPD: %s/%s with metdata: %s" % (key, bucket, metadata))
+            es.index(index='objects', doc_type='object', id=id, body=metadata)
+
         if bucket in buckets and action == 'SDEL':
             print("DEL: %s/%s" % (bucket, key))
             es.delete(index='objects', doc_type='object', id=id, ignore=[400, 404])
